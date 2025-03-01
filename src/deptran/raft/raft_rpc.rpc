@@ -1,0 +1,31 @@
+namespace janus;
+
+abstract service Raft {
+  defer RequestVote(uint64_t arg1,
+                    uint64_t arg2,
+                    uint64_t arg3,
+                    uint64_t arg4 |
+                    uint64_t ret1,
+                    bool_t vote_granted);
+
+
+
+  defer AppendEntries(uint64_t leaderId,
+                    uint64_t leaderTerm,
+                    uint64_t prefixLogIndex,
+                    uint64_t prevLogTerm,
+                    std::vector<MarshallDeputy> cmds,
+                    std::vector<uint64_t> terms,
+                    uint64_t leaderCommitIndex |
+                    uint64_t retTerm,
+                    uint64_t matchedIndex,
+                    bool_t success);
+
+  defer HeartBeat(uint64_t candidateId,
+                  uint64_t candidateTerm |
+                  uint64_t retTerm,
+                  bool_t isAlive);
+          
+  defer HelloRpc(string req | string res);  
+}
+
